@@ -1,6 +1,5 @@
 package ru.netology.rest;
 
-import io.restassured.module.jsv.JsonSchemaValidator;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
@@ -13,15 +12,14 @@ public class MobileBankApiTestV1 {
         // Given - When - Then
         // Предусловия
         given()
-                .baseUri("http://localhost:9999/api/v1")
+                .baseUri("https://postman-echo.com")
+                .body("some data") // отправляемые данные (заголовки и query можно выставлять аналогично)
                 // Выполняемые действия
                 .when()
-                .get("/demo/accounts")
+                .post("/post")
                 // Проверки
                 .then()
                 .statusCode(200)
-                // static import для JsonSchemaValidator.matchesJsonSchemaInClasspath
-        .body(matchesJsonSchemaInClasspath("accounts.schema.json"))
-        ;
+        .body(matchesJsonSchemaInClasspath("accounts.schema.json"));
     }
 }
